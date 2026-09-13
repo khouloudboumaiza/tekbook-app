@@ -1,6 +1,7 @@
+<<<<<<< HEAD
 # tekbook-lab2
 
-
+#Projet TP DevSecOps — Docker Compose et GitLab CI
 
 ## Getting started
 
@@ -91,3 +92,27 @@ For open source projects, say how it is licensed.
 
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+=======
+# TekBook
+
+Application Spring Boot minimale servant de support aux labs DevSecOps (TEK-UP, ING-5-SSIR).
+
+## Points d entree
+
+| Methode | Chemin | Description |
+|---|---|---|
+| GET | `/` | Message de service et version |
+| GET | `/api/books` | Liste de livres en dur |
+| GET | `/actuator/health` | Sonde de sante — repond `{"status":"UP"}` |
+
+## Lancer sans Docker
+
+    mvn spring-boot:run
+
+## Construire le JAR
+
+    mvn package -DskipTests
+    java -jar target/tekbook-0.0.1-SNAPSHOT.jar
+
+Le nom du JAR produit est `tekbook-0.0.1-SNAPSHOT.jar` : il correspond au `CMD` du Lab 3.
+>>>>>>> 9321764 (chore: remonter le projet a la racine du depot)
