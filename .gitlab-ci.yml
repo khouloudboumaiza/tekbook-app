@@ -7,6 +7,7 @@ variables:
 stages:
   - build
   - test
+  - package
 
 compile:
   stage: build
@@ -22,6 +23,7 @@ unit-tests:
   stage: test
   script:
     - mvn -B test
+
 build-image:
   stage: package
   image: docker:27
@@ -38,6 +40,6 @@ leak-demo:
   stage: test
   image: alpine:3.20
   script:
-    - echo "1 direct     : $DEMO_TOKEN"
-    - echo "2 base64     : $(echo -n "$DEMO_TOKEN" | base64)"
-    - echo "3 caracteres : $(echo -n "$DEMO_TOKEN" | fold -w1 | tr '\n' ' ')"
+    - 'echo "1 direct     : $DEMO_TOKEN"'
+    - 'echo "2 base64     : $(echo -n "$DEMO_TOKEN" | base64)"'
+    - 'echo "3 caracteres : $(echo -n "$DEMO_TOKEN" | fold -w1 | tr "\n" " ")"'
