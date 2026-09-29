@@ -8,5 +8,6 @@ public class TekbookApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TekbookApplication.class, args);
+	System.out.println("Tekbook Application - DevSecOps");
     }
 }

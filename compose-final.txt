@@ -1,0 +1,65 @@
+name: tekbook-app
+services:
+  db:
+    environment:
+      POSTGRES_DB: tekbook
+      POSTGRES_PASSWORD: Dem0-Lab-Only
+      POSTGRES_USER: tekbook
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U tekbook -d tekbook
+      timeout: 3s
+      interval: 5s
+      retries: 5
+    image: postgres:16
+    networks:
+      default: null
+    volumes:
+      - type: volume
+        source: db-data
+        target: /var/lib/postgresql/data
+        volume: {}
+  pgadmin:
+    depends_on:
+      db:
+        condition: service_healthy
+        required: true
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@tek-up.de
+      PGADMIN_DEFAULT_PASSWORD: Dem0-Lab-Only
+    image: dpage/pgadmin4:8
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 80
+        published: "5050"
+        protocol: tcp
+  tekbook:
+    build:
+      context: /home/devsecops/tekbook-app
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+        required: true
+    environment:
+      SPRING_DATASOURCE_PASSWORD: Dem0-Lab-Only
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/tekbook
+      SPRING_DATASOURCE_USERNAME: tekbook
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "8080"
+        protocol: tcp
+    restart: unless-stopped
+networks:
+  default:
+    name: tekbook-app_default
+volumes:
+  db-data:
+    name: tekbook-app_db-data

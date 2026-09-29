@@ -1,0 +1,12 @@
+Finding:     tekbook.api.key=[1;3;mAKIA2E0XYZ4QWERTY123[0m
+Secret:      [1;3;mAKIA2E0XYZ4QWERTY123[0m
+RuleID:      aws-access-token
+Entropy:     3.921928
+File:        tekbook-app/src/main/resources/application-local.properties
+Line:        6
+Commit:      c86465f4f7443ee37bf522eaee43aa7c06d5cbf0
+Author:      Oussema
+Email:       61743083+ouzss2@users.noreply.github.com
+Date:        2026-09-13T20:21:36Z
+Fingerprint: c86465f4f7443ee37bf522eaee43aa7c06d5cbf0:tekbook-app/src/main/resources/application-local.properties:aws-access-token:6
+
