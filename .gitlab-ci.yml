@@ -33,3 +33,11 @@ build-image:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
     - docker build -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA" .
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
+
+leak-demo:
+  stage: test
+  image: alpine:3.20
+  script:
+    - echo "1 direct     : $DEMO_TOKEN"
+    - echo "2 base64     : $(echo -n "$DEMO_TOKEN" | base64)"
+    - echo "3 caracteres : $(echo -n "$DEMO_TOKEN" | fold -w1 | tr '\n' ' ')"
