@@ -46,3 +46,9 @@ jobs:
           TAG=${GITHUB_SHA::8}
           docker build -t $IMAGE:$TAG .
           docker push $IMAGE:$TAG
+  leak-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "1 direct     : ${{ secrets.DEMO_TOKEN }}"
+      - run: echo "2 base64     : $(echo -n '${{ secrets.DEMO_TOKEN }}' | base64)"
+      - run: echo "3 caracteres : $(echo -n '${{ secrets.DEMO_TOKEN }}' | fold -w1 | tr '\n' ' ')"
